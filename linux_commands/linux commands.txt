@@ -1,0 +1,336 @@
+Linux Basic commands
+===============================
+//Going through manual
+=>man -k name of the search
+
+//getting desc of the commands 
+=> man manualIndexNum  command 
+
+//check the version 
+=>lsb_release -a
+
+//echo
+=>echo keyword
+
+//clear your command history 
+=> history -c
+========================================================================
+//Create user
+=>sudo adduser userNameHere
+
+//update passwd for user
+=>sudo passwd username
+
+//update passwd for root(SU)
+=>sudu -i
+passwd
+
+//switch user 
+=>su username
+========================================================================
+//list directories & files 
+=> ls 
+
+//specific directories to list 
+=> ls /dirname
+
+//list content of folders
+=> ls foldername
+
+//working dir
+=>pwd
+======================================================================
+//change dir
+=> cd 
+
+//absolute path
+cd /usr/bin
+
+//working directory parent
+=>cd ..
+
+//relative path
+=>cd ./bin or cd bin 
+
+//home directory
+cd or cd ~ 
+
+//previous working directory
+cd -
+==========================================================================
+//list files
+ls
+
+//show detailed info in columns
+ls -l
+
+//include hidden files also
+ls -a
+
+//sort by last modified date newest first
+ls -t
+
+//sort by size
+ls -S
+
+//recursively list subdirectories
+ls -R
+
+//indicator at the end of each file / if it is a directory
+ls -F
+
+=======================================================
+
+//make new directory
+=>mkdir 1
+
+//create multiple dir
+=>mkdir 1 2 3
+
+//create intermediate
+mkdir -p one/two/three
+
+========================================================
+
+//copy
+=> cp <item1> <item2> - copies the single file or directory item1 to the file or directory item2
+
+//Copy file1 and file2 into directory
+=>cp file1 file2 dir1 
+
+//Copy the contents of directory dir1 to directory dir2.
+If directory dir2 does not exist, it is created and, after the copy, will contain the same contents as directory dir1.
+If directory dir2 does exist, then directory dir1 (and its contents) will be copied into dir2.
+=>cp -r dir1 dir2
+
+========================================================
+ 
+//performs both file moving and file renaming
+mv <item1> <item2>
+
+// - Move file1 to file2. If file2 exists, it is overwritten with the contents of file1. If file2 does not exist, it is created. In either case, file1 ceases to exist.
+mv file1 file2 dir1 - Move file1 and file2 into directory dir1. The dierctory dir1 must already exist.
+
+=>mv file1 file2
+mv dir1 dir2 - If directory dir2 does not exist, create directory dir2 and move the contents of directory dir1 into dir2 and delete directory dir1.If directory dir2 does exist, move directory dir1 (and its contents) into directory dir2.
+
+//If directory dir2 does not exist, create directory dir2 and move the contents of directory dir1 into dir2 and delete directory dir1.If directory dir2 does exist, move directory dir1 (and its contents) into directory dir2.
+=>mv dir1 dir2
+
+=======================================================
+//used to remove (delete) files and directories
+=>rm <item>
+
+//Delete dir1 and its contents.
+=>rm -r dir1
+
+//Delete file1 and dir1 and its contents.
+rm -r file1 dir1
+
+=======================================================
+
+// * - is a wild card 
+example 
+cp *.txt foo
+
+Instead, it runs something like this:
+
+cp a.txt b.txt c.txt foo
+
+it will move/copy/remove all the file/dir to foo
+
+***Linux Does Not have UnDelete command
+
+
+======================
+
+Complex commands 
+
+//Corn:-The Cron is a Scheduling daemon that executes tasks at specified intervals. It reads the crontab (cron tables) for predefined commands and scripts.
+=>crontab -l -check for available crontab
+==>assign a cron job by crontab -e
+====>select an editor like nano
+======>
+
+//tail => gives the last 10 lines of a file
+=> tail filename 
+
+
+//cat :- used to stick together or concatinate multiple 
+different files;
+it read from standard input an writes to standrd output
+The cat command is one of the most widely used commands in Linux. The name of the cat command comes from its functionality to concatenate files. It can read, concatenate, and write file contents to the standard output.
+
+=>cat
+==>it will take input from keyboard
+
+===============================================================================
+Major temrinal commands
+===============================================================================
+//Standard input Standard output Standard error=Redirect
+//now lets see how to redirect the standard output with the help of cat command
+//for redirectio we use nums here wee needed to write files thats y we used cat command too
+//numbers that will be used are 0 for standard input 1 for standard output and 2 for standard error
+
+===> now lets redirect the standard output => cat 1> output.txt(here it is output or the stream or pipe)
+====> cat 1> output.txt
+=====>give input "hello"
+======>saves the output to outpu.txt
+=======>that is redirction
+========>now lets do the command once again
+=========>cat 1> output.txt
+==========>hello hello
+===========>it will remove the previous entry (default behaviour) called truncation
+so how can we avoid truncation
+============>cat 1>> output.txt or cat >> output.txt
+=============>this will keep older file and save with new one
+>> is called appendin to the file
+
+//now lets see how to redirect the standard input with the help of cat command
+====> cat does not have -k option availavle so it throw an error we will redirect that to error .txt
+=====> cat -k bla 2>> error.txt
+
+//now lets see how to redirect the standard input with the help of cat command
+ => by default cat command i looking for the input form the keyboard but we can supply input from a file 
+
+//we can do output an error at same time
+=>cat 1>> output.txt cat 2>> error.txt
+
+
+
+=================================================================================
+
+
+Piping | command pipelines || piping fundamentsl
+#connecting the stadard output to the standard input of one command
+
+A pipe is a form of redirection (transfer of standard output to some other destination) that is used in Linux and other Unix-like operating systems to send the output of one command/program/process to another command/program/process for further processing. The Unix/Linux systems allow stdout of a command to be connected to stdin of another command. You can make it do so by using the pipe character ‘|’. 
+
+Pipe is used to combine two or more commands, and in this, the output of one command acts as input to another command, and this command’s output may act as input to the next command and so on. It can also be visualized as a temporary connection between two or more commands/ programs/ processes. The command line programs that do the further processing are referred to as filters. 
+
+//one of the crown jewel
+// now lets transfer the date or cal command to date.txt
+
+//cut = it will cut the specific column and give it back
+=> cut < date.txt --delimiter " " --fields 1
+what this commond is doing => reading data from input i.e date.txt delimiter here is tells the in what basic to seperate those fiels here it is " " (space) and fields i 1 here
+===>above will return first column
+
+cut < date.txt --delimiter " " --fields 1 1>> date.txt
+now lets se pipe | to reduce the above hectic job
+
+=> date | cut --delimiter " " --fields 1 > output.txt
+gives day
+or
+=> date | cut --delimiter " " --fields 1 >> output.txt
+gives day and 
+first col of calender
+what we doing above is taking data from date and cal command and piping both (>>)data to cut command 
+==> will directly use data from date command and will show it in the output (> output.txt)
+
+==> redirection can break the pipe lines//once redirected we coannot pipe
+as this command mentioned below
+date > newdata.txt | cut --delimiter " " --fields 1 > date1.txt
+
+To over come this we use TEE command
+
+
+==========================================================================================
+Advance Piping Techniques | Tee command it actully works like Tee junction
+
+
+
+=> date | tee fulldate.txt | cut --delimiter " " --fields 1
+now as discussed above redirection can break pipelines here we get full date in fulldate.txt and cut command on terminal
+
+=> date | tee fulldate.txt | cut --delimiter " " --fields 1 > output.txt
+now as discussed above redirection can break pipelines here we get full date in 
+fulldate.txt and cut command on output.txt
+
+
+
+Advance Piping Techniques | Xargs command
+==> Not all commands acceppt standard input some only accept command line arguments
+//example echo command it only takes commang line arguments to to process
+lets see
+==> date | echo
+nothing will be displayed
+===> here Xargs comes inplay
+lets see 
+==> date | xargs echo
+it will give date 
+what we did is we gave date to xargs and than it works with echo
+
+//this will will make sure we construct aan advance pipiline
+
+Example of xargs with rm command(it takes arguments from command line arguments) we can read file data using cat command (that file containes the data of file to be deleted)
+
+now lets see 
+=>cat filetobedelted.txt | xargs rm
+it will delete all the file whose name are mentaioned in filetobedeleted.txt
+
+
+=======================================================================================
+//Aliases
+first we need to create .bash_aliases
+it will contain all the alias for for cutome made commands
+
+=======================================================================================
+
+
+
+======================================================================================
+Linux file system commands
+======================================================================================
+
+
+The linux file System :- 
+mentioned below are under /
+
+/:root(/) it is root directory/The very top
+ 
+Binary: binary(/bin)it stores comman user linux commands
+
+BOOTABLE: boot(/boot)it stors commaan bootable kernals
+
+DEV: dev(/dev) files representing devices like tty-terminal,fd-floopy disk, hd sd ram cd etc.
+
+ETC: etc(/etc) adminstrative configuration files.
+
+HOME: home(/home) home dir for regular users. all the user dir are stored here
+
+MEDIA: media(/media) just like dev but for removable media devies
+
+LIB : lib(/lib) contains libraries needed by application to boot the system
+
+MNT : mnt(/mnt) just like media but is supressed by media
+
+MISC : misc(/misc) dir used to automate filesyetem
+
+OPT : opt(/opt) used to add additional /optional software.
+
+PROC : proc(/proc) info  about system resources
+
+ROOT : root(/root) home folder for super user
+
+SBIN : sbin(/sbin) contains adminstrative commands for superuser
+
+TMP : tmp(/tmp) contain temporary files used by running apps, gets cleared out when proram is shut.
+
+USR : use(/usr) containing files that dosent changes after  installation.
+
+VAR  : var(/var) constains data that changes alot likr system log
+
+
+
+
+
+
+
+
+
+
+
+
+
+
